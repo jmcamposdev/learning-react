@@ -3,22 +3,10 @@ import './App.css'
 
 import { TURNS } from './constants';
 import { checkWinner, checkTie } from './logic/board.js';
+import { Square } from './components/Square.jsx';
 
 
 
-
-const Square = ({children, isSelected, updateBoard, index} ) => {
-  const squareClassName = `square ${isSelected ? 'is-selected' : ''}`;
-  function handleClick() {
-    updateBoard(index);
-  }
-
-  return (
-    <div onClick={handleClick} className={squareClassName}>
-      {children}
-    </div>
-  )
-};
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
