@@ -1,28 +1,28 @@
-import "./App.css";
-import { TwitterFolloCard } from "./TwitterFollowCard";
+import './App.css'
+import { TwitterFolloCard } from './TwitterFollowCard'
 
-export default function App() {
+export default function App () {
   const users = [
     {
-      userName: "jmcamposdev",
-      name: "José María Campos",
-      isFollowing: true,
+      userName: 'jmcamposdev',
+      name: 'José María Campos',
+      isFollowing: true
     },
     {
-      userName: "hoxuro",
-      name: "Heriberto",
-      isFollowing: true,
+      userName: 'hoxuro',
+      name: 'Heriberto',
+      isFollowing: true
     },
     {
-      userName: "hjimenezdev",
-      name: "Hugo Jiménez",
-      isFollowing: false,
-    },
-  ];
+      userName: 'hjimenezdev',
+      name: 'Hugo Jiménez',
+      isFollowing: false
+    }
+  ]
   return (
-    <section className="card-container">
+    <section className='card-container'>
       {users.map((user) => {
-        const { userName, name, isFollowing } = user;
+        const { userName, name, isFollowing } = user
         return (
           <TwitterFolloCard
             key={userName}
@@ -30,8 +30,8 @@ export default function App() {
             name={name}
             initialIsFollowing={isFollowing}
           />
-        );
+        )
       })}
     </section>
-  );
+  )
 }
