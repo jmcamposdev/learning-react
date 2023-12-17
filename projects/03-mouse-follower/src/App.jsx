@@ -51,7 +51,6 @@ function App () {
       if (isHovering(randomPosition, { x: clientX, y: clientY }) && !isCursorHoveringBall) {
         const newScore = score + 1
         if (newScore % SUM_SECONDS_EACH_LEVEL === 0) {
-          console.log('sum seconds' + secondsCount)
           setSecondsCount(secondsCount + 1)
         }
         setScore(newScore)
