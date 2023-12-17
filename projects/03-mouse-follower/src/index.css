@@ -73,3 +73,13 @@ button:focus-visible {
 body.no-cursor {
   cursor: none;
 }
+
+.randomCircle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  top: 0;
+  left: 0;
+}
