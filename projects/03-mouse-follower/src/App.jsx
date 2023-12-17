@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
 import { CursorCircle } from './components/CursorCircle'
 import { RandomCircle } from './components/RandomCircle'
+import { INITIAL_CURSOR_POSITION, INITIAL_IS_CURSOR_HOVERING_BALL, INITIAL_SCORE, INITIAL_SECONDS_COUNT, SUM_SECONDS_EACH_LEVEL } from './constants.js'
 
-const INITIAL_SECONDS_COUNT = 20
-const INITIAL_CURSOR_POSITION = { x: 0, y: 0 }
-const INITIAL_IS_CURSOR_HOVERING_BALL = false
-const INITIAL_SCORE = 0
-const SUM_SECONDS_EACH_LEVEL = 7
 /* ********************** */
 // Functions
 /* ********************** */
