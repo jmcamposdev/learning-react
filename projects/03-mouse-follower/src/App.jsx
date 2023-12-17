@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react'
 import { CursorCircle } from './components/CursorCircle'
 import { RandomCircle } from './components/RandomCircle'
 
+const INITIAL_SECONDS_COUNT = 20
+const INITIAL_CURSOR_POSITION = { x: 0, y: 0 }
+const INITIAL_IS_CURSOR_HOVERING_BALL = false
+const INITIAL_SCORE = 0
+const SUM_SECONDS_EACH_LEVEL = 7
 /* ********************** */
 // Functions
 /* ********************** */
 const generateRandomPosition = () => {
-  const randomX = Math.floor(Math.random() * window.innerWidth)
-  const randomY = Math.floor(Math.random() * window.innerHeight)
+  const randomX = Math.floor(Math.random() * (window.innerWidth - 50))
+  const randomY = Math.floor(Math.random() * (window.innerHeight - 50))
   return { x: randomX, y: randomY }
 }
 
@@ -21,11 +26,11 @@ function isHovering (randomPosition, position) {
 }
 
 function App () {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [cursorPosition, setCursorPosition] = useState(INITIAL_CURSOR_POSITION)
   const [randomPosition, setRandomPosition] = useState(generateRandomPosition())
-  const [isCursorHoveringBall, setIsCursorHoveringBall] = useState(false)
-  const [score, setScore] = useState(0)
-  const [secondsCount, setSecondsCount] = useState(20)
+  const [isCursorHoveringBall, setIsCursorHoveringBall] = useState(INITIAL_IS_CURSOR_HOVERING_BALL)
+  const [score, setScore] = useState(INITIAL_SCORE)
+  const [secondsCount, setSecondsCount] = useState(INITIAL_SECONDS_COUNT)
   const [isGameStopped, setIsGameStopped] = useState(false)
 
   const resetGame = () => {
@@ -42,9 +47,14 @@ function App () {
   useEffect(() => {
     const handleMove = (event) => {
       const { clientX, clientY } = event
-      setPosition({ x: clientX, y: clientY })
+      setCursorPosition({ x: clientX, y: clientY })
       if (isHovering(randomPosition, { x: clientX, y: clientY }) && !isCursorHoveringBall) {
-        setScore(score + 1)
+        const newScore = score + 1
+        if (newScore % SUM_SECONDS_EACH_LEVEL === 0) {
+          console.log('sum seconds' + secondsCount)
+          setSecondsCount(secondsCount + 1)
+        }
+        setScore(newScore)
         setIsCursorHoveringBall(true)
       }
     }
@@ -52,14 +62,14 @@ function App () {
     // Add the event listener to the window
     window.addEventListener('pointermove', handleMove)
     // Put the cursor ball in the cursor position
-    setPosition({ x: window.clientX, y: window.clientY })
+    setCursorPosition({ x: window.clientX, y: window.clientY })
     // Clean the useEffect
     // This function is called when the component is unmounted or when the enabled state changes
     return () => {
       // Remove the event listener
       window.removeEventListener('pointermove', handleMove)
       // Reset the position
-      setPosition({ x: 0, y: 0 })
+      setCursorPosition({ x: 0, y: 0 })
     }
   }, [randomPosition])
 
@@ -93,7 +103,7 @@ function App () {
 
   return (
     <main>
-      <CursorCircle position={position} width={50} height={50} />
+      <CursorCircle position={cursorPosition} width={50} height={50} />
       <RandomCircle position={randomPosition} />
 
       <h1>Time</h1>
