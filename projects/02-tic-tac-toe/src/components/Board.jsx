@@ -1,20 +1,21 @@
-import { Square } from './Square.jsx';
+import { Square } from './Square.jsx'
 
-export function Board ({board, updateBoard}) {
+export function Board ({ board, updateBoard }) {
   return (
-    <section className="game">
-        {
+    <section className='game'>
+      {
           board.map((cell, index) => {
             return (
-              <Square 
+              <Square
                 key={index}
                 index={index}
-                updateBoard={updateBoard}>
+                updateBoard={updateBoard}
+              >
                 {cell}
               </Square>
             )
           })
         }
-      </section>
-  );
+    </section>
+  )
 }

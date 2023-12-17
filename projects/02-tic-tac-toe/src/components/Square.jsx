@@ -1,7 +1,7 @@
-export function Square ({children, isSelected, updateBoard, index}) {
-  const squareClassName = `square ${isSelected ? 'is-selected' : ''}`;
-  function handleClick() {
-    updateBoard(index);
+export function Square ({ children, isSelected, updateBoard, index }) {
+  const squareClassName = `square ${isSelected ? 'is-selected' : ''}`
+  function handleClick () {
+    updateBoard(index)
   }
 
   return (
