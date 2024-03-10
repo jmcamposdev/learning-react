@@ -1,25 +1,15 @@
-import { useEffect, useState } from 'react'
-import { getRandomFact } from './services/fact'
 import useCatImage from './hooks/useCatImage'
+import useCatFact from './hooks/useCatFact'
 
 const App = () => {
-  const [fact, setFact] = useState('')
+  const { fact, refreshFact } = useCatFact()
   const { imageUrl } = useCatImage({ fact })
-
-  /**
-   * Get the fact calling to the API in the first Render
-   */
-  useEffect(async () => {
-    const newFact = await getRandomFact()
-    setFact(newFact)
-  }, [])
 
   /**
    * Generate a random fact
    */
   const handleClick = async () => {
-    const newFact = await getRandomFact()
-    setFact(newFact)
+    refreshFact()
   }
 
   return (
