@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getRandomFact } from './services/fact'
+import useCatImage from './hooks/useCatImage'
 
 const App = () => {
   const [fact, setFact] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
+  const { imageUrl } = useCatImage({ fact })
 
   /**
    * Get the fact calling to the API in the first Render
@@ -14,18 +15,8 @@ const App = () => {
   }, [])
 
   /**
-   * Get the cat image when the fact state change
+   * Generate a random fact
    */
-  useEffect(() => {
-    if (fact.length === 0) return
-
-    const firstLetter = fact.split()[0]
-
-    fetch(`https://cataas.com/cat/says/${firstLetter}`)
-      .then(response => setImageUrl(response.url))
-      .catch(err => console.error(err))
-  }, [fact])
-
   const handleClick = async () => {
     const newFact = await getRandomFact()
     setFact(newFact)
