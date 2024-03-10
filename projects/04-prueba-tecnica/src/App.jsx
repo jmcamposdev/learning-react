@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { getRandomFact } from './services/fact'
 
 const App = () => {
   const [fact, setFact] = useState('')
@@ -7,11 +8,9 @@ const App = () => {
   /**
    * Get the fact calling to the API in the first Render
    */
-  useEffect(() => {
-    fetch('https://catfact.ninja/fact')
-      .then(response => response.json())
-      .then(response => setFact(response.fact))
-      .catch(err => console.log(err))
+  useEffect(async () => {
+    const newFact = await getRandomFact()
+    setFact(newFact)
   }, [])
 
   /**
@@ -27,9 +26,15 @@ const App = () => {
       .catch(err => console.error(err))
   }, [fact])
 
+  const handleClick = async () => {
+    const newFact = await getRandomFact()
+    setFact(newFact)
+  }
+
   return (
     <>
       <h1>Fact</h1>
+      <button type='button' onClick={handleClick}>Generate Fact</button>
       <p>{fact}</p>
       <img src={imageUrl} alt='' />
     </>
