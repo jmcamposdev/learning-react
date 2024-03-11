@@ -4,6 +4,14 @@ import withoutResults from './mocks/no-results.json'
 import { Movies } from './components/Movies'
 
 function App () {
+  const movies = withResults.Search
+  const mappedMovies = movies.map(movie => ({
+    id: movie.imdbID,
+    title: movie.Title,
+    year: movie.Year,
+    poster: movie.Poster
+  }))
+
   return (
     <div className='page'>
       <h1>Buscador  Peliculas</h1>
@@ -15,7 +23,7 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={withResults.Search} />
+        <Movies movies={mappedMovies} />
       </main>
     </div>
   )
