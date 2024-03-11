@@ -18,3 +18,10 @@
 .movie-list > li {
   flex: 1 0 200px;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
