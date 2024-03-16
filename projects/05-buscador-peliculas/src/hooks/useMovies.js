@@ -24,10 +24,11 @@ export function useMovies ({ search, sort }) {
   }
 
   const sortMovie = useCallback(() => {
-    sort 
-      ? 
-
-  }, [sort, movies])
+    sort
+      ? setMovies([...movies].sort((a, b) => a.title.localeCompare(b.title)))
+      : setMovies([...movies].sort((a, b) => b.title.localeCompare(a.title)))
+  }
+  , [sort, movies])
 
   return ({ movies, getMovies, loading, error })
 }
