@@ -23,6 +23,7 @@ export function useMovies ({ search, sort }) {
     }
   }
 
+  // We use useCallback to avoid creating a new function on every render
   const sortMovie = useCallback(() => {
     sort
       ? setMovies([...movies].sort((a, b) => a.title.localeCompare(b.title)))
